@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { ethers } from "ethers";
 import "./App.css";
 import IdeaPage from "./IdeaPage";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+
 
 function App() {
+  
+
+
   const [account, setAccount] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -29,6 +35,7 @@ function App() {
 
   // Render IdeaPage if connected
   return (
+
     <div className="app-container">
       {isConnected ? (
         <IdeaPage account={account} />

@@ -58,7 +58,7 @@ body {
 }
 
 .search-bar-container i {
-  color: #ffd52d;
+  color: #30ff2d;
   font-size: 1.5rem;
   transition: opacity 0.3s ease;
 }
@@ -66,9 +66,9 @@ body {
 .search-bar-container input {
   padding: 12px;
   font-size: 1rem;
-  color: #ffd52d;
+  color: #30ff2d;
   background-color: #2d2d2d;
-  border: 2px solid #ffd52d;
+  border: 2px solid #2dff5a;
   border-radius: 50px;
   width: 120px;
   transition: width 0.4s ease, background-color 0.3s ease;
@@ -151,3 +151,102 @@ body {
 }
 
 /* For the IdeaPage Component, add similar styling as needed */
+
+
+/* Body and Background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #1c1c1c; /* Uniform dark background */
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Idea Submission Container */
+.idea-submission-container {
+  width: 100%;
+  max-width: 850px;
+  background-color: #2d2d2d;
+  padding: 20px;
+  border-radius: 8px;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+/* Heading */
+.idea-submission-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #30ff2d; /* Light yellow for the title */
+}
+
+/* Form Input Styles */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: #30ff2d;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 90%;
+  padding: 12px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3b3640;
+  border: 2px solid #30ff2d;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #7a4df7;
+  background-color: #4c4554;
+}
+
+.input-group textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+/* Submit Button */
+button {
+  background-color: #7a4df7; /* Purple Gradient */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #4a29e0; /* Darker purple on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Success Page Container */
+.success-container {
+  text-align: center;
+  padding: 20px;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
+  background-color: #e8f5e9;
+  color: #4CAF50;
+}
