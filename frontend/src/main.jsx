@@ -5,11 +5,12 @@ import './index.css'
 import IdeaPage from './IdeaPage.jsx'
 import IdeaSubmission from './IdeaSubmission.jsx'
 import SuccessPage from './SuccessPage.jsx'
+import RoutePage from './Routes.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RoutePage />
   </React.StrictMode>,
 )
-
+ 
