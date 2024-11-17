@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { ethers } from "ethers";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
-import IdeaPage from "./IdeaPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-
 
 function App() {
-  
-
-
   const [account, setAccount] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const navigate = useNavigate(); // Import useNavigate
 
   // Function to connect MetaMask
   const connectWallet = async () => {
@@ -24,6 +19,9 @@ function App() {
         setAccount(userAddress);
         setIsConnected(true);
         alert(`Connected: ${userAddress}`);
+        
+        // Navigate to the /idea route
+        navigate("/idea");
       } catch (error) {
         console.error("Connection error:", error);
         alert("Failed to connect. Please try again.");
@@ -33,17 +31,11 @@ function App() {
     }
   };
 
-  // Render IdeaPage if connected
   return (
-
     <div className="app-container">
-      {isConnected ? (
-        <IdeaPage account={account} />
-      ) : (
-        <button className="wallet-button" onClick={connectWallet}>
-          Connect Wallet
-        </button>
-      )}
+      <button className="wallet-button" onClick={connectWallet}>
+        {isConnected ? "Connected" : "Connect Wallet"}
+      </button>
     </div>
   );
 }
