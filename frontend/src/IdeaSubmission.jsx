@@ -1,22 +1,22 @@
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function IdeaSubmission() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Log the data to the console for now, you can send this data to your smart contract
     console.log("Idea Submitted:", { title, description });
     
     // Reset the fields after submission
     setTitle("");
     setDescription("");
     
-    // Optionally, add navigation to another page after submission (like a success page)
-    // navigate("/success"); // Uncomment if using navigate
+    // Navigate to the success page
+    navigate("/success");
   };
 
   return (

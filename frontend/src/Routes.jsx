@@ -8,7 +8,7 @@ function RoutePage(){
     return(
         <BrowserRouter>
     <Routes>
-      <Route path = "/home" element={<App />}></Route>
+      <Route path = "/" element={<App />}></Route>
       <Route path="/idea" element={<IdeaPage />}></Route>
       <Route path="/submit" element={<IdeaSubmission />}></Route>
       <Route path="/success" element={<SuccessPage />}></Route>
