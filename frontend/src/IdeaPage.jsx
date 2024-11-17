@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function IdeaPage({ account }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate(); // Import useNavigate
 
   const handleSearch = () => {
     alert(`Searching for: ${searchQuery}`);
   };
 
   const handleSubmitIdea = () => {
-    alert("Navigate to Submit Idea Form (Functionality to be added).");
+    // Navigate to the /submit route
+    navigate("/submit");
   };
 
   return (
