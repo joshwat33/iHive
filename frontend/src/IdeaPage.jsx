@@ -6,6 +6,8 @@ import { abi } from "./IHive.json";
 
 function IdeaPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [ideas, setIdeas] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation(); // Get location object to access state
   const account = location.state?.account; // Retrieve the account from state
@@ -13,13 +15,27 @@ function IdeaPage() {
 
   const handleSearch = async(e) => {
     e.preventDefault();
-    alert(`Searching for: ${searchQuery}`);
+    if (!searchQuery) {
+      alert("Please enter a search query.");
+      return;
+    }
+    setIsLoading(true);
     if (account) {
       const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const instance = new Contract(contractAddress, abi, signer);
+      try {
+        // Call the `searchSimilarIdeas` function from the smart contract
+        const result = await instance.searchSimilarIdeas(searchQuery);
+  
+        // Process the result (list of similar ideas)
+        setIdeas(result);
+      } catch (error) {
+        console.error("Error fetching ideas:", error);
+        alert("Failed to search ideas.");
+      }
     };
-
+    setIsLoading(false);
   };
 
   const handleSubmitIdea = () => {
@@ -36,7 +52,6 @@ function IdeaPage() {
 
       {/* Main Content */}
       <div className="main-actions">
-        {/* Submit Idea Button */}
         <button onClick={handleSubmitIdea} className="submit-button">
           Submit Idea
         </button>
@@ -50,8 +65,30 @@ function IdeaPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search ideas..."
           />
-          <button onClick={handleSearch}>Search</button>
+          <button onClick={handleSearch} disabled={isLoading}>
+            {isLoading ? "Searching..." : "Search"}
+          </button>
         </div>
+
+        {/* Display the Results */}
+        {ideas.length > 0 && (
+          <div className="search-results">
+            <h2>Similar Ideas:</h2>
+            <ul>
+              {ideas.map((idea, index) => (
+                <li key={index}>
+                  <strong>Title:</strong> {idea.title}
+                  <br />
+                  <strong>Tagline:</strong> {idea.tagline}
+                  <br />
+                  <strong>For further details regarding this idea, check out the link below</strong>
+                  <br />
+                  https://gateway.pinata.cloud/ipfs/{idea.ipfsHash}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

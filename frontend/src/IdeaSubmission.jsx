@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import processData from "./test-ipfs.ts"; // Import test-ipfs component
+import processData from "./write-ipfs.ts"; // Import test-ipfs component
 import { contractAddress } from "./deployed_addresses.json";
 import { abi } from "./IHive.json";
 import { Contract, BrowserProvider } from "ethers";
@@ -27,7 +27,7 @@ function IdeaSubmission() {
     console.log("Data Submitted:", { name, email, description, ideaTitle, tagline });
 
     // Call test-ipfs processing function with only the relevant data
-    const result = await processData({ name, email, description }); // Passing only relevant data
+    const result = await processData({ name, email,ideaTitle,tagline, description }); // Passing only relevant data
     setIpfsResult(result.IpfsHash); // Store the returned data
     console.log("IPFS Result:", result);
     console.log("Account:", account);

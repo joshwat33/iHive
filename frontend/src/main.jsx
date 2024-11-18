@@ -4,7 +4,6 @@ import App from './App.jsx'
 import './index.css'
 import IdeaPage from './IdeaPage.jsx'
 import IdeaSubmission from './IdeaSubmission.jsx'
-import SuccessPage from './SuccessPage.jsx'
 import RoutePage from './Routes.jsx'
 
 
