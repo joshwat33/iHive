@@ -121,12 +121,6 @@ function IdeaSubmission() {
         <button type="submit">Submit Idea</button>
       </form>
 
-      {ipfsResult && (
-        <div className="result-container">
-          <h2>Processed Data:</h2>
-          <pre>{JSON.stringify(ipfsResult, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }

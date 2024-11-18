@@ -47,15 +47,15 @@ function IdeaPage() {
     <div className="idea-page">
       {/* NavBar */}
       <nav className="navbar">
-        <h1>Welcome {account ? `, ${account}` : ""}</h1>
+        <h1>Welcome {account ? `  ${account}` : ""}</h1>
       </nav>
-
+  
       {/* Main Content */}
       <div className="main-actions">
         <button onClick={handleSubmitIdea} className="submit-button">
           Submit Idea
         </button>
-
+  
         {/* Fixed Search Bar with Search Button */}
         <div className="search-bar-container">
           <i className="fas fa-search"></i>
@@ -69,8 +69,8 @@ function IdeaPage() {
             {isLoading ? "Searching..." : "Search"}
           </button>
         </div>
-
-        {/* Display the Results */}
+  
+        {/* Display the Results BELOW the search bar */}
         {ideas.length > 0 && (
           <div className="search-results">
             <h2>Similar Ideas:</h2>
@@ -84,6 +84,8 @@ function IdeaPage() {
                   <strong>For further details regarding this idea, check out the link below</strong>
                   <br />
                   https://gateway.pinata.cloud/ipfs/{idea.ipfsHash}
+                  <br />
+                  <br/>
                 </li>
               ))}
             </ul>
@@ -92,6 +94,7 @@ function IdeaPage() {
       </div>
     </div>
   );
+  
 }
 
 export default IdeaPage;

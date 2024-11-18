@@ -33,11 +33,23 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Welcome Message */}
+      <div className="welcome-section">
+        <h1>Welcome to iHive</h1>
+        <p>
+          iHive is a blockchain-based platform designed to store and validate your ideas securely.
+          By leveraging the power of decentralized technology, we ensure that your ideas are 
+          protected and verified transparently.
+        </p>
+        <p>Connect your wallet to get started and bring your ideas to life!</p>
+      </div>
+      {/* Connect Wallet Button */}
       <button className="wallet-button" onClick={connectWallet}>
         {isConnected ? "Connected" : "Connect Wallet"}
       </button>
     </div>
   );
 }
+
 
 export default App;
