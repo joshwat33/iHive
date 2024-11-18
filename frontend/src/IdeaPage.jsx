@@ -1,22 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Contract,  BrowserProvider } from "ethers";
+import { contractAddress } from "./deployed_addresses.json";
+import { abi } from "./IHive.json";
 
-function IdeaPage({ account }) {
+function IdeaPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); // Get location object to access state
+  const account = location.state?.account; // Retrieve the account from state
+  console.log("Account:", account);
 
-  const handleSearch = () => {
+  const handleSearch = async(e) => {
+    e.preventDefault();
     alert(`Searching for: ${searchQuery}`);
+    if (account) {
+      const provider = new BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const instance = new Contract(contractAddress, abi, signer);
+    };
+
   };
 
   const handleSubmitIdea = () => {
-    alert("Navigate to Submit Idea Form (Functionality to be added).");
+    // Navigate to the submit page, passing the account along
+    navigate("/submit", { state: { account } });
   };
 
   return (
     <div className="idea-page">
       {/* NavBar */}
       <nav className="navbar">
-        <h1>Welcome, {account}</h1>
+        <h1>Welcome {account ? `, ${account}` : ""}</h1>
       </nav>
 
       {/* Main Content */}
@@ -26,23 +41,16 @@ function IdeaPage({ account }) {
           Submit Idea
         </button>
 
-        {/* Stylish Search Bar */}
-        <div
-          className="search-bar-container"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        {/* Fixed Search Bar with Search Button */}
+        <div className="search-bar-container">
           <i className="fas fa-search"></i>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search ideas..."
           />
-          {isHovered && (
-            <button onClick={handleSearch}>
-              Search
-            </button>
-          )}
+          <button onClick={handleSearch}>Search</button>
         </div>
       </div>
     </div>

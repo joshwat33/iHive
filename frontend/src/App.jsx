@@ -1,33 +1,41 @@
-import React, { useState, useEffect } from "react";
-import { ethers } from "ethers";
+import React, { useState } from "react";
 import { BrowserProvider } from "ethers";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
-import IdeaPage from "./IdeaPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { contractAddress } from "./deployed_addresses.json"; // Update with your contract address
-import { abi } from "./IHive.json"; // ABI of your IHive contract
 
 function App() {
-  const [account, setAccount] = useState(null); // Define account state
+  const [account, setAccount] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
-  const provider = new BrowserProvider(window.ethereum);
-  async function connectWallet() {
-    const signer = await provider.getSigner();
-    const userAddress = await signer.getAddress();
-    setAccount(userAddress); // Set account state with the user's address
-    alert(`Successfully Connected ${signer.address}`);
-    setIsConnected(true);
-  }
-  //render IdeaPage if connected
+  const navigate = useNavigate(); // Import useNavigate
+
+  // Function to connect MetaMask
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const provider = new BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const userAddress = await signer.getAddress();
+        setAccount(userAddress);
+        setIsConnected(true);
+        console.log("Connected:", userAddress);
+        alert(`Connected: ${userAddress}`);
+        
+        // Navigate to the /idea route and pass the account
+        navigate("/idea", { state: { account: userAddress } });
+      } catch (error) {
+        console.error("Connection error:", error);
+        alert("Failed to connect. Please try again.");
+      }
+    } else {
+      alert("MetaMask is not installed. Please install MetaMask and try again.");
+    }
+  };
+
   return (
     <div className="app-container">
-      {isConnected ? (
-          <IdeaPage account={account} />
-      ) : (
-        <button className="wallet-button" onClick={connectWallet}>
-          Connect Wallet
-        </button>
-      )}
+      <button className="wallet-button" onClick={connectWallet}>
+        {isConnected ? "Connected" : "Connect Wallet"}
+      </button>
     </div>
   );
 }
